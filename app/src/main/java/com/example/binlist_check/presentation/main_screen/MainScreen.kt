@@ -1,8 +1,11 @@
 package com.example.binlist_check.presentation.main_screen
 
-import android.util.Log
-import androidx.compose.animation.*
-import androidx.compose.foundation.background
+
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
+import android.widget.Toast
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,7 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -25,8 +28,11 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.startActivity
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.binlist_check.common.Constants
+import com.example.binlist_check.common.Utils
 import com.example.binlist_check.presentation.Routes.historyScreenRoute
 
 
@@ -36,8 +42,8 @@ fun MainScreen(
     navController: NavController,
     viewModel: MainScreenViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
     val state = viewModel.state.collectAsState()
-
 
     val currentBinInput = rememberSaveable{ mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -100,20 +106,57 @@ fun MainScreen(
             Spacer(Modifier.weight(1f))
         }
 
-        if (state.value.cardData!=null) {
-            LazyColumn(
-                modifier = Modifier.weight(1f)
-            ) {
-                item {
+
+        LazyColumn(
+            modifier = Modifier.weight(1f)
+        ) {
+            item {
+                if (state.value.cardData!=null) {
                     BankCard(
-                        cardData = state.value.cardData!!
+                        cardData = state.value.cardData!!,
+                        onCoordinatesClick = {latitide, longtitude ->
+                            val geoUri = Utils.getGeoUri(latitide, longtitude)
+                            val intent = Intent(Intent.ACTION_VIEW, geoUri)
+
+                            try {
+                                startActivity(context, intent, null)
+                            } catch (e: ActivityNotFoundException) {
+                                Toast.makeText(context,
+                                    Constants.activityNotFoundExceptionMessage, Toast.LENGTH_SHORT).show()
+                            }
+
+                        },
+                        onLinkClick = { link ->
+                            val linkUri = Utils.getLinkUri(link)
+
+                            val intent = Intent(Intent.ACTION_VIEW, linkUri)
+                            try {
+                                startActivity(context, intent, null)
+                            } catch (e: ActivityNotFoundException) {
+                                Toast.makeText(context,
+                                    Constants.activityNotFoundExceptionMessage, Toast.LENGTH_SHORT).show()
+                            }
+
+
+                        },
+                        onPhoneClick = { phoneNumber ->
+                            val telephoneUri = Utils.getTelephoneUriUri(phoneNumber)
+
+                            val intent = Intent(Intent.ACTION_DIAL, telephoneUri);
+                            try {
+                                startActivity(context, intent, null)
+                            } catch (e: ActivityNotFoundException) {
+                                Toast.makeText(context,
+                                    Constants.activityNotFoundExceptionMessage, Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     )
+
                 }
 
             }
 
         }
-
 
 
         Button(

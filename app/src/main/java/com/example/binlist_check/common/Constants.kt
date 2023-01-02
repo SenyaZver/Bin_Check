@@ -12,4 +12,6 @@ object Constants {
     const val loadCardDataIOExceptionMessage = "IO exception: check Internet connection!"
     const val wrongInputMessage = "Wrong input! Bin should ne a number"
     const val loadQueriesIOExceptionMessage = "IO exception: failed to load database!"
+    const val activityNotFoundExceptionMessage = "No application to perform this action is installed!"
+
 }

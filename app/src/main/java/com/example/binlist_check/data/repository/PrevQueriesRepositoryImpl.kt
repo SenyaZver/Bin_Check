@@ -10,8 +10,6 @@ class PrevQueriesRepositoryImpl @Inject constructor(
     private val pastQueriesDAO: PastQueriesDAO
 ): PrevQueriesRepository{
 
-
-
     override suspend fun getAllQueries(): List<CardData> {
         return pastQueriesDAO.getAllQueries()
     }

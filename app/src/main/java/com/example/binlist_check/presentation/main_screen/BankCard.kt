@@ -22,9 +22,9 @@ import com.example.binlist_check.data.entity.CardData
 fun BankCard(
     modifier: Modifier = Modifier,
     cardData: CardData,
-    onCoordinatesClick: () -> Unit = {},
-    onLinkClick: () -> Unit = {},
-    onPhoneClick: () -> Unit = {}
+    onCoordinatesClick: (Long, Long) -> Unit,
+    onLinkClick: (String) -> Unit,
+    onPhoneClick: (String) -> Unit
 ) {
     Card(
         modifier = modifier,
@@ -62,7 +62,7 @@ fun BankCard(
                 if (cardData.bank.url!= null) {
                     Button(
                         onClick = {
-                            onLinkClick()
+                            onLinkClick(cardData.bank.url)
                         }
                     ) {
                         Text(
@@ -74,7 +74,7 @@ fun BankCard(
                 if (cardData.bank.phone!= null) {
                     Button(
                         onClick = {
-                            onPhoneClick()
+                            onPhoneClick(cardData.bank.phone)
                         }
                     ) {
                         Text(
@@ -198,7 +198,7 @@ fun BankCard(
                         )
                         Button(
                             onClick = {
-                                onCoordinatesClick()
+                                onCoordinatesClick(cardData.country.latitude, cardData.country.longitude)
                             }
                         ) {
                             Column() {
