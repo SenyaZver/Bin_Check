@@ -3,6 +3,7 @@ package com.example.binlist_check.presentation.history_screen
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.binlist_check.common.Status
+import com.example.binlist_check.common.error_type.ErrorType
 import com.example.binlist_check.domain.usecase.ClearPastQueriesUseCase
 import com.example.binlist_check.domain.usecase.GetPastQueriesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -40,7 +41,7 @@ class HistoryScreenViewModel @Inject constructor(
                     }
                     is Status.Error -> {
                         _state.update {
-                            HistoryScreenState(errorMessage = status.message)
+                            HistoryScreenState(errorType = status.errorType)
                         }
                     }
                 }
@@ -52,23 +53,31 @@ class HistoryScreenViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             clearPastQueriesUseCase.execute().collect { status ->
                 when (status) {
-                    is Status.Loading -> {}
+                    is Status.Loading -> {
+                        _state.update {
+                            HistoryScreenState(isLoading = true)
+                        }
+                    }
                     is Status.Success -> {
                         _state.update {
-                            HistoryScreenState(
-                                queriesList = emptyList()
-                            )
+                            HistoryScreenState(queriesList = emptyList())
                         }
                     }
                     is Status.Error -> {
                         _state.update {
-                            HistoryScreenState(
-                                errorMessage = status.message
-                            )
+                            HistoryScreenState(errorType = status.errorType)
                         }
                     }
                 }
             }
+        }
+    }
+
+    fun showActivityNotFoundError() {
+        _state.update {
+            it.copy(
+                errorType = ErrorType.ActivityNotFoundError
+            )
         }
     }
 

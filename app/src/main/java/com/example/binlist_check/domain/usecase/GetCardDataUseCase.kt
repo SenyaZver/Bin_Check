@@ -1,8 +1,7 @@
 package com.example.binlist_check.domain.usecase
 
-import com.example.binlist_check.R
 import com.example.binlist_check.common.Status
-import com.example.binlist_check.common.StringProvider
+import com.example.binlist_check.common.error_type.ErrorType
 import com.example.binlist_check.data.entity.CardData
 import com.example.binlist_check.domain.data_source.DataSource
 import com.example.binlist_check.domain.repository.PrevQueriesRepository
@@ -14,8 +13,7 @@ import javax.inject.Inject
 
 class GetCardDataUseCase @Inject constructor(
     private val dataSource: DataSource,
-    private val prevQueriesRepository: PrevQueriesRepository,
-    private val stringProvider: StringProvider
+    private val prevQueriesRepository: PrevQueriesRepository
 ){
     suspend fun execute(bin: Long) = flow{
         try {
@@ -29,12 +27,10 @@ class GetCardDataUseCase @Inject constructor(
             emit(Status.Success<CardData>(data = cardData))
         }
         catch (e: HttpException) {
-            val message = stringProvider.provideString( R.string.http_exception_message, e.code() )
-            emit(Status.Error<CardData>(message = message))
+            emit(Status.Error<CardData>(errorType = ErrorType.HttpError))
         }
         catch (e: IOException) {
-            val message = stringProvider.provideString(R.string.load_card_data_io_exception_message)
-            emit(Status.Error<CardData>(message = message))
+            emit(Status.Error<CardData>(errorType = ErrorType.LoadCardDataIoError))
         }
 
     }

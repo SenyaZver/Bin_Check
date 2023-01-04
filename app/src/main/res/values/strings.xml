@@ -13,14 +13,14 @@
     <string name="clear">Clear</string>
 
 <!--    exception message strings-->
-    <string name="load_card_data_io_exception_message">loadCardDataIOExceptionMessage</string>
-    <string name="load_queries_io_exception_message">IO exception: failed to load database!</string>
+    <string name="load_card_data_io_exception_message">Failed to load bank data!</string>
+    <string name="load_queries_io_exception_message">Failed to load database!</string>
     <string name="activity_not_found_exception_message">No application to perform this action is installed!</string>
     <string name="http_exception_message">Http error: %d</string>
+    <string name="wrong_input_message">Wrong input! Bin should ne a number</string>
 
 <!--    messages strings-->
-    <string name="wrong_input_message">Wrong input! Bin should ne a number</string>
-    <string name="no_bank_found_message">No such bank found. Check your input!</string>
+    <string name="no_bank_found_message">No such bank found. Check your BIN input!</string>
 
 <!--bank card composable strings-->
     <string name="bin_inn_number">BIN/INN: %d</string>

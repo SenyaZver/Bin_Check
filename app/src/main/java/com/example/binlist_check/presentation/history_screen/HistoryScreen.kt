@@ -27,6 +27,7 @@ import com.example.binlist_check.common.Utils.getLinkUri
 import com.example.binlist_check.common.Utils.getTelephoneUriUri
 import com.example.binlist_check.presentation.main_screen.BankCard
 import com.example.binlist_check.R
+import com.example.binlist_check.presentation.common.ShowError
 
 @Composable
 fun HistoryScreen(
@@ -36,7 +37,6 @@ fun HistoryScreen(
     val state = viewModel.state.collectAsState()
     val context = LocalContext.current
 
-    val activityNotFoundExceptionMessage = stringResource(R.string.activity_not_found_exception_message)
 
     if (state.value.isLoading) {
         Box(Modifier.fillMaxSize()) {
@@ -93,7 +93,7 @@ fun HistoryScreen(
                             startActivity(context, intent, null)
                         } catch (e: ActivityNotFoundException) {
 
-                            Toast.makeText(context, activityNotFoundExceptionMessage, Toast.LENGTH_SHORT).show()
+                            viewModel.showActivityNotFoundError()
                         }
 
                     },
@@ -104,7 +104,7 @@ fun HistoryScreen(
                         try {
                             startActivity(context, intent, null)
                         } catch (e: ActivityNotFoundException) {
-                            Toast.makeText(context, activityNotFoundExceptionMessage, Toast.LENGTH_SHORT).show()
+                            viewModel.showActivityNotFoundError()
                         }
 
 
@@ -116,48 +116,11 @@ fun HistoryScreen(
                         try {
                             startActivity(context, intent, null)
                         } catch (e: ActivityNotFoundException) {
-                            Toast.makeText(context, activityNotFoundExceptionMessage, Toast.LENGTH_SHORT).show()
+                            viewModel.showActivityNotFoundError()
                         }
                     }
                 )
 
-//                BankCard(
-//                    cardData = state.value.queriesList[index],
-//                    onCoordinatesClick = {latitide, longtitude ->
-//                        val geoUri = getGeoUri(latitide, longtitude)
-//                        val intent = Intent(Intent.ACTION_VIEW, geoUri)
-//
-//                        try {
-//                            startActivity(context, intent, null)
-//                        } catch (e: ActivityNotFoundException) {
-//
-//                            Toast.makeText(context, activityNotFoundExceptionMessage, Toast.LENGTH_SHORT).show()
-//                        }
-//
-//                    },
-//                    onLinkClick = { link ->
-//                        val linkUri = getLinkUri(link)
-//
-//                        val intent = Intent(Intent.ACTION_VIEW, linkUri)
-//                        try {
-//                            startActivity(context, intent, null)
-//                        } catch (e: ActivityNotFoundException) {
-//                            Toast.makeText(context, activityNotFoundExceptionMessage, Toast.LENGTH_SHORT).show()
-//                        }
-//
-//
-//                    },
-//                    onPhoneClick = { phoneNumber ->
-//                        val telephoneUri = getTelephoneUriUri(phoneNumber)
-//
-//                        val intent = Intent(Intent.ACTION_DIAL, telephoneUri);
-//                        try {
-//                            startActivity(context, intent, null)
-//                        } catch (e: ActivityNotFoundException) {
-//                            Toast.makeText(context, activityNotFoundExceptionMessage, Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
-//                )
 
                 Spacer(Modifier.height(20.dp))
             }
@@ -168,5 +131,7 @@ fun HistoryScreen(
 
 
     }
+
+    ShowError(errorType = state.value.errorType)
 
 }

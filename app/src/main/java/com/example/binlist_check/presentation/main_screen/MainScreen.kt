@@ -38,6 +38,7 @@ import com.example.binlist_check.common.Constants
 import com.example.binlist_check.common.Utils
 import com.example.binlist_check.presentation.Routes.historyScreenRoute
 import com.example.binlist_check.presentation.common.NullableAnimatedVisibility
+import com.example.binlist_check.presentation.common.ShowError
 
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalAnimationApi::class)
@@ -131,8 +132,7 @@ fun MainScreen(
                                 try {
                                     startActivity(context, intent, null)
                                 } catch (e: ActivityNotFoundException) {
-                                    Toast.makeText(context,
-                                        activityNotFoundExceptionMessage, Toast.LENGTH_SHORT).show()
+                                    viewModel.showActivityNotFoundError()
                                 }
 
                             },
@@ -143,8 +143,7 @@ fun MainScreen(
                                 try {
                                     startActivity(context, intent, null)
                                 } catch (e: ActivityNotFoundException) {
-                                    Toast.makeText(context,
-                                        activityNotFoundExceptionMessage, Toast.LENGTH_SHORT).show()
+                                    viewModel.showActivityNotFoundError()
                                 }
 
 
@@ -156,8 +155,7 @@ fun MainScreen(
                                 try {
                                     startActivity(context, intent, null)
                                 } catch (e: ActivityNotFoundException) {
-                                    Toast.makeText(context,
-                                        activityNotFoundExceptionMessage, Toast.LENGTH_SHORT).show()
+                                    viewModel.showActivityNotFoundError()
                                 }
                             }
                         )
@@ -186,5 +184,7 @@ fun MainScreen(
 
 
     }
+    
+    ShowError(errorType = state.value.errorType)
 
 }
