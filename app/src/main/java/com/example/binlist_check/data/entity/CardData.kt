@@ -9,7 +9,8 @@ import com.example.binlist_check.data.remote.response.Number
 
 @Entity(tableName = TABLE_NAME)
 data class CardData(
-    @PrimaryKey val bin: Long,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
+    val bin: Long,
     @Embedded(prefix = "number_") val number: Number?,
     val scheme: String?,
     val type: String?,
