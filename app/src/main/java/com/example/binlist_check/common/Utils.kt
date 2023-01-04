@@ -19,4 +19,14 @@ object Utils {
     fun getTelephoneUriUri(phoneNumber: String): Uri = Uri.parse("tel:$phoneNumber")
 
     fun getGeoUri(latitude: Long, longitude: Long): Uri = Uri.parse("geo:${latitude},${longitude}")
+
+    fun getFormattedString(string: String?): String? {
+        if (string == null) return null
+        val stringBuilder = StringBuilder(string)
+
+        stringBuilder[0] = stringBuilder[0].uppercaseChar()
+
+
+        return stringBuilder.toString()
+    }
 }

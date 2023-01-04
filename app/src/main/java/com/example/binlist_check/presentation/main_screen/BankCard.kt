@@ -12,11 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.binlist_check.data.entity.CardData
-
+import com.example.binlist_check.R
 
 @Composable
 fun BankCard(
@@ -36,20 +37,20 @@ fun BankCard(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "BIN/INN: ${cardData.bin}",
+                text = stringResource(R.string.bin_inn_number, cardData.bin),
                 fontSize = 24.sp,
                 fontWeight = FontWeight.Bold
             )
 
             Text(
-                text = "BANK",
+                text = stringResource(R.string.bank),
                 color = MaterialTheme.colors.secondary
             )
 
 
             if (cardData.bank == null) {
                 Text(
-                    text = "No such bank found. Check your input!"
+                    text = stringResource(R.string.no_bank_found_message)
                 )
             } else {
                 if (cardData.bank.name!= null) {
@@ -98,7 +99,7 @@ fun BankCard(
 
                     if (cardData.scheme!= null) {
                         Text(
-                            text = "SCHEME / NETWORK",
+                            text = stringResource(R.string.scheme_network),
                             color = MaterialTheme.colors.secondary
                         )
                         Text(
@@ -110,7 +111,7 @@ fun BankCard(
 
                     if (cardData.brand!= null) {
                         Text(
-                            text = "BRAND",
+                            text = stringResource(R.string.brand),
                             color = MaterialTheme.colors.secondary
                         )
                         Text(
@@ -123,13 +124,13 @@ fun BankCard(
 
                     if (cardData.number!= null) {
                         Text(
-                            text = "CARD NUMBER",
+                            text = stringResource(R.string.card_number),
                             color = MaterialTheme.colors.secondary
                         )
                         Row() {
                             Column() {
                                 Text(
-                                    text = "LENGTH",
+                                    text = stringResource(R.string.length),
                                     color = MaterialTheme.colors.secondary
                                 )
 
@@ -142,11 +143,11 @@ fun BankCard(
 
                             Column() {
                                 Text(
-                                    text = "LUHN",
+                                    text = stringResource(R.string.luhn),
                                     color = MaterialTheme.colors.secondary
                                 )
 
-                                val luhnString = if (cardData.number.luhn) { "Yes" } else { "No"}
+                                val luhnString = if (cardData.number.luhn) { stringResource(R.string.yes) } else { stringResource(R.string.no) }
 
                                 Text(
                                     text = luhnString,
@@ -161,7 +162,7 @@ fun BankCard(
                 Column() {
                     if (cardData.type!= null) {
                         Text(
-                            text = "TYPE",
+                            text = stringResource(R.string.type),
                             color = MaterialTheme.colors.secondary
                         )
                         Text(
@@ -173,11 +174,11 @@ fun BankCard(
 
                     if (cardData.prepaid!= null) {
                         Text(
-                            text = "PREPAID",
+                            text = stringResource(R.string.prepaid),
                             color = MaterialTheme.colors.secondary
                         )
 
-                        val prepaidString = if (cardData.prepaid) { "Yes" } else { "No"}
+                        val prepaidString = if (cardData.prepaid) { stringResource(R.string.yes) } else { stringResource(R.string.no) }
 
 
                         Text(
@@ -189,7 +190,7 @@ fun BankCard(
 
                     if (cardData.country!= null) {
                         Text(
-                            text = "COUNTRY",
+                            text = stringResource(R.string.country),
                             color = MaterialTheme.colors.secondary
                         )
                         Text(
@@ -203,11 +204,12 @@ fun BankCard(
                         ) {
                             Column() {
                                 Text(
-                                    text = "Latitude: ${cardData.country.latitude}",
+                                    text = stringResource(R.string.latitude_arg, cardData.country.latitude)
                                 )
                                 Text(
-                                    text = "Longtitude: ${cardData.country.longitude}",
+                                    text = stringResource(R.string.longtitude_arg, cardData.country.longitude)
                                 )
+
                             }
                         }
                     }

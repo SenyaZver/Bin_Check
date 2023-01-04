@@ -1,13 +1,12 @@
 package com.example.binlist_check.presentation.main_screen
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.binlist_check.common.Constants.wrongInputMessage
+import com.example.binlist_check.R
 import com.example.binlist_check.common.Status
+import com.example.binlist_check.common.StringProvider
 import com.example.binlist_check.domain.usecase.GetCardDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -16,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainScreenViewModel @Inject constructor(
-    private val getCardDataUseCase: GetCardDataUseCase
+    private val getCardDataUseCase: GetCardDataUseCase,
+    private val stringProvider: StringProvider
 ):ViewModel() {
     private val _state = MutableStateFlow(MainScreenState())
     val state = _state.asStateFlow()
@@ -26,10 +26,13 @@ class MainScreenViewModel @Inject constructor(
         viewModelScope.launch {
             val bin = binInput.toLongOrNull()
 
+
             if (bin == null) {
+                val message = stringProvider.provideString(R.string.wrong_input_message)
+
                 _state.update {
                     MainScreenState(
-                        errorMessage = wrongInputMessage
+                        errorMessage = message
                     )
                 }
                 return@launch

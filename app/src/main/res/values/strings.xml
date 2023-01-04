@@ -1,3 +1,42 @@
 <resources>
-    <string name="app_name">Binlist_Check</string>
+    <string name="app_name">BIN/INN Checker</string>
+
+
+<!--main screen strings-->
+    <string name="bin">BIN</string>
+    <string name="inn">BIN</string>
+    <string name="main_screen_suggestion">Input your BIN or INN!</string>
+    <string name="history_screen_button">History of previous queries</string>\
+
+<!--    history screen strings-->
+    <string name="queries_history">Queries history</string>
+    <string name="clear">Clear</string>
+
+<!--    exception message strings-->
+    <string name="load_card_data_io_exception_message">loadCardDataIOExceptionMessage</string>
+    <string name="load_queries_io_exception_message">IO exception: failed to load database!</string>
+    <string name="activity_not_found_exception_message">No application to perform this action is installed!</string>
+    <string name="http_exception_message">Http error: %d</string>
+
+<!--    messages strings-->
+    <string name="wrong_input_message">Wrong input! Bin should ne a number</string>
+    <string name="no_bank_found_message">No such bank found. Check your input!</string>
+
+<!--bank card composable strings-->
+    <string name="bin_inn_number">BIN/INN: %d</string>
+    <string name="bank">Bank</string>
+    <string name="scheme_network">SCHEME / NETWORK</string>
+    <string name="brand">BRAND</string>
+    <string name="card_number">CARD NUMBER</string>
+    <string name="length">LENGTH</string>
+    <string name="luhn">LUHN</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="type">TYPE</string>
+    <string name="prepaid">PREPAID</string>
+    <string name="country">COUNTRY</string>
+    <string name="latitude_arg">Latitude: %d</string>
+    <string name="longtitude_arg">Longtitude: %d</string>
+
+
 </resources>

@@ -1,5 +1,6 @@
 package com.example.binlist_check.data.remote.response
 
+import com.example.binlist_check.common.Utils.getFormattedString
 import com.example.binlist_check.data.entity.Bank
 import com.example.binlist_check.data.entity.CardData
 import com.example.binlist_check.data.entity.Country
@@ -18,9 +19,9 @@ data class BinResponse (
 fun BinResponse.toCardData(bin: Long): CardData {
     return CardData(
         bin = bin,
-        scheme = scheme,
-        type = type,
-        brand = brand,
+        scheme = getFormattedString(scheme),
+        type = getFormattedString(type),
+        brand = getFormattedString(brand),
         prepaid = prepaid,
         bank = bank,
         country = country,

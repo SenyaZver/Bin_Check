@@ -24,6 +24,7 @@ class HistoryScreenViewModel @Inject constructor(
     val state = _state.asStateFlow()
 
     init {
+
         viewModelScope.launch(Dispatchers.IO) {
             getPastQueriesUseCase.execute().collect { status ->
                 when (status) {
@@ -34,7 +35,7 @@ class HistoryScreenViewModel @Inject constructor(
                     }
                     is Status.Success -> {
                         _state.update {
-                            HistoryScreenState(queriesList = status.data)
+                            HistoryScreenState(queriesList = status.data ?: emptyList())
                         }
                     }
                     is Status.Error -> {
@@ -55,7 +56,7 @@ class HistoryScreenViewModel @Inject constructor(
                     is Status.Success -> {
                         _state.update {
                             HistoryScreenState(
-                                queriesList = null
+                                queriesList = emptyList()
                             )
                         }
                     }
