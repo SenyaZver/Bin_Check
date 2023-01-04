@@ -29,10 +29,7 @@ class GetCardDataUseCase @Inject constructor(
             emit(Status.Success<CardData>(data = cardData))
         }
         catch (e: HttpException) {
-            val message = stringProvider.provideStringWithArgument(
-                R.string.http_exception_message,
-                e.code()
-            )
+            val message = stringProvider.provideString( R.string.http_exception_message, e.code() )
             emit(Status.Error<CardData>(message = message))
         }
         catch (e: IOException) {

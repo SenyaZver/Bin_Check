@@ -10,10 +10,8 @@ class StringProvider @Inject constructor(
     private val context: Context
 ) {
 
-    fun provideString(@StringRes res: Int): String {
-        return context.getString(res)
+    fun provideString(@StringRes res: Int, vararg formatArgs: Any = emptyArray()): String {
+        return context.getString(res, *formatArgs)
     }
-    fun provideStringWithArgument(@StringRes res: Int, arg: Int): String {
-        return context.getString(res, arg)
-    }
+
 }

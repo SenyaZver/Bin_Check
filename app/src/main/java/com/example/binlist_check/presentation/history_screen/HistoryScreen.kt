@@ -82,7 +82,8 @@ fun HistoryScreen(
         ) {
             items(state.value.queriesList.size) { index ->
 
-                BankCard(
+                PastQuery(
+                    modifier = Modifier.fillMaxWidth(),
                     cardData = state.value.queriesList[index],
                     onCoordinatesClick = {latitide, longtitude ->
                         val geoUri = getGeoUri(latitide, longtitude)
@@ -98,8 +99,8 @@ fun HistoryScreen(
                     },
                     onLinkClick = { link ->
                         val linkUri = getLinkUri(link)
-
                         val intent = Intent(Intent.ACTION_VIEW, linkUri)
+
                         try {
                             startActivity(context, intent, null)
                         } catch (e: ActivityNotFoundException) {
@@ -119,6 +120,44 @@ fun HistoryScreen(
                         }
                     }
                 )
+
+//                BankCard(
+//                    cardData = state.value.queriesList[index],
+//                    onCoordinatesClick = {latitide, longtitude ->
+//                        val geoUri = getGeoUri(latitide, longtitude)
+//                        val intent = Intent(Intent.ACTION_VIEW, geoUri)
+//
+//                        try {
+//                            startActivity(context, intent, null)
+//                        } catch (e: ActivityNotFoundException) {
+//
+//                            Toast.makeText(context, activityNotFoundExceptionMessage, Toast.LENGTH_SHORT).show()
+//                        }
+//
+//                    },
+//                    onLinkClick = { link ->
+//                        val linkUri = getLinkUri(link)
+//
+//                        val intent = Intent(Intent.ACTION_VIEW, linkUri)
+//                        try {
+//                            startActivity(context, intent, null)
+//                        } catch (e: ActivityNotFoundException) {
+//                            Toast.makeText(context, activityNotFoundExceptionMessage, Toast.LENGTH_SHORT).show()
+//                        }
+//
+//
+//                    },
+//                    onPhoneClick = { phoneNumber ->
+//                        val telephoneUri = getTelephoneUriUri(phoneNumber)
+//
+//                        val intent = Intent(Intent.ACTION_DIAL, telephoneUri);
+//                        try {
+//                            startActivity(context, intent, null)
+//                        } catch (e: ActivityNotFoundException) {
+//                            Toast.makeText(context, activityNotFoundExceptionMessage, Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//                )
 
                 Spacer(Modifier.height(20.dp))
             }
