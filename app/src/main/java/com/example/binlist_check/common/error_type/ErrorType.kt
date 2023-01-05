@@ -9,5 +9,4 @@ enum class ErrorType(@StringRes val messageRes: Int) {
     ActivityNotFoundError(R.string.activity_not_found_exception_message),
     HttpError(R.string.http_exception_message),
     WrongInput(R.string.wrong_input_message)
-
 }

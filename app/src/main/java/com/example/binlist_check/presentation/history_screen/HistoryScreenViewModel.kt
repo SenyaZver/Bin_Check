@@ -81,5 +81,13 @@ class HistoryScreenViewModel @Inject constructor(
         }
     }
 
+    fun messageShown() {
+        _state.update {
+            it.copy(
+                errorType = null
+            )
+        }
+    }
+
 
 }

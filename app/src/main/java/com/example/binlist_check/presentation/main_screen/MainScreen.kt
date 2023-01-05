@@ -185,6 +185,11 @@ fun MainScreen(
 
     }
     
-    ShowError(errorType = state.value.errorType)
+    ShowError(
+        errorType = state.value.errorType,
+        onErrorReceived = {
+            viewModel.messageShown()
+        }
+    )
 
 }
