@@ -3,10 +3,7 @@ package com.example.binlist_check.presentation.main_screen
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.net.Uri
-import android.widget.Toast
 import androidx.compose.animation.*
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -34,7 +31,6 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.binlist_check.R
-import com.example.binlist_check.common.Constants
 import com.example.binlist_check.common.Utils
 import com.example.binlist_check.presentation.Routes.historyScreenRoute
 import com.example.binlist_check.presentation.common.NullableAnimatedVisibility
@@ -53,7 +49,6 @@ fun MainScreen(
     val currentBinInput = rememberSaveable{ mutableStateOf("") }
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    val activityNotFoundExceptionMessage = stringResource(R.string.activity_not_found_exception_message)
 
     Column(
         modifier = Modifier
@@ -151,7 +146,7 @@ fun MainScreen(
                             onPhoneClick = { phoneNumber ->
                                 val telephoneUri = Utils.getTelephoneUriUri(phoneNumber)
 
-                                val intent = Intent(Intent.ACTION_DIAL, telephoneUri);
+                                val intent = Intent(Intent.ACTION_DIAL, telephoneUri)
                                 try {
                                     startActivity(context, intent, null)
                                 } catch (e: ActivityNotFoundException) {

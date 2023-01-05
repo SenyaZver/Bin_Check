@@ -65,7 +65,7 @@ fun PastQuery(
                     fontWeight = FontWeight.Bold
                 )
 
-                val imageModifier = if (show.value) { Modifier } else { Modifier.rotate(180f) }
+                val imageModifier = if (show.value) { Modifier.rotate(180f) } else { Modifier }
 
 
                 Image(
