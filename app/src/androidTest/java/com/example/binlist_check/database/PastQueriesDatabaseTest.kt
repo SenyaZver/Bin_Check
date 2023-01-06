@@ -1,7 +1,6 @@
-package com.example.binlist_check
+package com.example.binlist_check.database
 
 import android.content.Context
-import android.util.Log
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -10,7 +9,7 @@ import com.example.binlist_check.data.database.PastQueriesDatabase
 import com.example.binlist_check.data.entity.CardData
 import kotlinx.coroutines.runBlocking
 import org.junit.After
-import org.junit.Assert.assertEquals
+import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,7 +17,7 @@ import java.io.IOException
 
 
 @RunWith(AndroidJUnit4::class)
-class HistoryDataBaseUnitTest {
+class PastQueriesDatabaseTest {
     private lateinit var dao: PastQueriesDAO
     private lateinit var database: PastQueriesDatabase
 
@@ -38,7 +37,7 @@ class HistoryDataBaseUnitTest {
 
     @Test
     @Throws(Exception::class)
-    fun addQuery_SizeTest(){
+    fun addQuery(){
         runBlocking{
             val cardData = CardData(
                 id = 1,
@@ -112,6 +111,5 @@ class HistoryDataBaseUnitTest {
             assertEquals(pastQueries.size, 3)
         }
     }
-
 
 }
