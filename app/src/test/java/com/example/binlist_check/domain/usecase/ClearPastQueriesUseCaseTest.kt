@@ -4,6 +4,7 @@ import com.example.binlist_check.common.Status
 import com.example.binlist_check.data.entity.CardData
 import com.example.binlist_check.data.repository.TestPrevQueriesRepository
 import kotlinx.coroutines.runBlocking
+import org.junit.After
 import org.junit.Assert
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -52,7 +53,11 @@ class ClearPastQueriesUseCaseTest {
                 }
             }
         }
+    }
 
+    @After
+    fun reset() {
+        prevQueriesRepository.setException(null)
     }
 
 

@@ -1,9 +1,12 @@
 package com.example.binlist_check.domain.usecase
 
+import android.database.sqlite.SQLiteDiskIOException
 import com.example.binlist_check.common.Status
+import com.example.binlist_check.common.error_type.ErrorType
 import com.example.binlist_check.data.entity.CardData
 import com.example.binlist_check.data.repository.TestPrevQueriesRepository
 import kotlinx.coroutines.runBlocking
+import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -52,8 +55,29 @@ class GetPastQueriesUseCaseTest {
 
             }
         }
+    }
 
+    @Test
+    fun `SQL exception when getting past queries`() {
+        prevQueriesRepository.setException(SQLiteDiskIOException())
 
+        runBlocking {
+            getPastQueriesUseCase.execute().collect { status ->
+                assertFalse(status is Status.Success)
+
+                if (status is Status.Error) {
+                    assertNull(status.data)
+
+                    assertEquals(status.errorType, ErrorType.SQLiteError)
+                }
+
+            }
+        }
+    }
+
+    @After
+    fun reset() {
+        prevQueriesRepository.setException(null)
     }
 
 

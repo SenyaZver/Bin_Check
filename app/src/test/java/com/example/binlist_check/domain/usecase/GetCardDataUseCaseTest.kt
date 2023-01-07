@@ -33,6 +33,24 @@ class GetCardDataUseCaseTest {
     }
 
     @Test
+    fun `Starts loading`() {
+        val bin = 12345678L
+
+        var beganLoading = false
+        runBlocking {
+            getCardDataUseCase.execute(bin).collect { status ->
+                if (status is Status.Loading) {
+                    beganLoading = true
+                } else {
+                    assertTrue(beganLoading)
+                }
+
+
+            }
+        }
+    }
+
+    @Test
     fun `Get correct card data use case`() {
         val bin = 12345678L
         runBlocking {
@@ -61,7 +79,7 @@ class GetCardDataUseCaseTest {
                     assertNull(status.data)
                     assertNotNull(status.errorType)
 
-                    assertTrue(status.errorType!!.messageRes == ErrorType.LoadCardDataIoError.messageRes)
+                    assertEquals(status.errorType!!.messageRes ,ErrorType.LoadCardDataIoError.messageRes)
                 }
             }
         }
@@ -90,6 +108,7 @@ class GetCardDataUseCaseTest {
     @After
     fun reset() {
         dataSource.setException(null)
+        prevQueriesRepository.setException(null)
     }
 }
 
