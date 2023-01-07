@@ -21,5 +21,3 @@ Bin Check was created using:
 - JUnit
 
 Some screenshots:
-![Screenshot_2](https://user-images.githubusercontent.com/72809101/211141108-394061fd-aeed-44a3-8ef3-56e09aa549fe.png)
-![Screenshot_5](https://user-images.githubusercontent.com/72809101/211141110-2bad77c5-c7a1-415a-ac4e-acc482827420.png)
