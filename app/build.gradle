@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.binlist_check'
+    namespace 'com.example.bin_check'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.binlist_check"
+        applicationId "com.example.bin_check"
         minSdk 21
         targetSdk 33
         versionCode 1
