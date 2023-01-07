@@ -25,6 +25,8 @@ import com.example.binlist_check.common.Utils.getGeoUri
 import com.example.binlist_check.common.Utils.getLinkUri
 import com.example.binlist_check.common.Utils.getTelephoneUriUri
 import com.example.binlist_check.presentation.common.ShowError
+import com.example.binlist_check.presentation.theme.smallSpacerSize
+import com.example.binlist_check.presentation.theme.standartSpacerSize
 
 @Composable
 fun HistoryScreen(
@@ -56,7 +58,7 @@ fun HistoryScreen(
             )
         }
 
-        Spacer(Modifier.height(10.dp))
+        Spacer(Modifier.height(smallSpacerSize))
 
         Button(
             onClick = {
@@ -69,7 +71,7 @@ fun HistoryScreen(
             )
         }
 
-        Spacer(Modifier.height(20.dp))
+        Spacer(Modifier.height(standartSpacerSize))
 
 
 
@@ -119,7 +121,7 @@ fun HistoryScreen(
                 )
 
 
-                Spacer(Modifier.height(20.dp))
+                Spacer(Modifier.height(standartSpacerSize))
             }
 
         }

@@ -35,6 +35,7 @@ import com.example.binlist_check.common.Utils
 import com.example.binlist_check.presentation.Routes.historyScreenRoute
 import com.example.binlist_check.presentation.common.NullableAnimatedVisibility
 import com.example.binlist_check.presentation.common.ShowError
+import com.example.binlist_check.presentation.theme.standartSpacerSize
 
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalAnimationApi::class)
@@ -100,7 +101,7 @@ fun MainScreen(
             )
         )
 
-        Spacer(Modifier.height(20.dp))
+        Spacer(Modifier.height(standartSpacerSize))
 
         if (state.value.isLoading) {
             Spacer(Modifier.weight(1f))
@@ -160,6 +161,7 @@ fun MainScreen(
             }
 
         }
+
 
 
         Button(

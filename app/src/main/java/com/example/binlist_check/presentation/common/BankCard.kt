@@ -1,8 +1,6 @@
 package com.example.binlist_check.presentation.main_screen
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.Card
@@ -11,13 +9,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.binlist_check.data.entity.CardData
 import com.example.binlist_check.R
+import com.example.binlist_check.data.entity.CardData
+import com.example.binlist_check.presentation.theme.smallSpacerSize
+import com.example.binlist_check.presentation.theme.standartSpacerSize
 
 @Composable
 fun BankCard(
@@ -88,7 +87,7 @@ fun BankCard(
 
             }
 
-            Spacer(Modifier.height(20.dp))
+            Spacer(Modifier.height(standartSpacerSize))
 
 
             Row(
@@ -106,7 +105,7 @@ fun BankCard(
                             text = cardData.scheme,
                         )
 
-                        Spacer(Modifier.height(20.dp))
+                        Spacer(Modifier.height(standartSpacerSize))
                     }
 
                     if (cardData.brand!= null) {
@@ -127,11 +126,15 @@ fun BankCard(
                             text = stringResource(R.string.card_number),
                             color = MaterialTheme.colors.secondary
                         )
+
+                        Spacer(Modifier.height(smallSpacerSize))
+
                         Row() {
                             Column() {
                                 Text(
                                     text = stringResource(R.string.length),
-                                    color = MaterialTheme.colors.secondary
+                                    color = MaterialTheme.colors.secondary,
+                                    fontSize = 12.sp
                                 )
 
                                 Text(
@@ -139,12 +142,13 @@ fun BankCard(
                                 )
                             }
 
-                            Spacer(Modifier.width(10.dp))
+                            Spacer(Modifier.width(smallSpacerSize))
 
                             Column() {
                                 Text(
                                     text = stringResource(R.string.luhn),
-                                    color = MaterialTheme.colors.secondary
+                                    color = MaterialTheme.colors.secondary,
+                                    fontSize = 12.sp
                                 )
 
                                 val luhnString = if (cardData.number.luhn) { stringResource(R.string.yes) } else { stringResource(R.string.no) }

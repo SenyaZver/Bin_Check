@@ -1,5 +1,6 @@
 package com.example.binlist_check.domain.usecase
 
+import android.database.sqlite.SQLiteException
 import com.example.binlist_check.common.Status
 import com.example.binlist_check.common.error_type.ErrorType
 import com.example.binlist_check.data.entity.CardData
@@ -19,8 +20,12 @@ class GetPastQueriesUseCase @Inject constructor(
             val queriesList = prevQueriesRepository.getAllQueries()
 
             emit(Status.Success<List<CardData>>(data = queriesList))
-        } catch (e: IOException) {
+        }
+        catch (e: IOException) {
             emit(Status.Error<List<CardData>>(errorType = ErrorType.LoadQueriesIoError))
+        }
+        catch (e: SQLiteException) {
+            emit(Status.Error<List<CardData>>(errorType = ErrorType.SQLiteError))
         }
 
 

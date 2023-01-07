@@ -1,12 +1,21 @@
 package com.example.binlist_check.domain.usecase
 
 import com.example.binlist_check.common.Status
+import com.example.binlist_check.common.error_type.ErrorType
 import com.example.binlist_check.data.remote.TestDataSource
 import com.example.binlist_check.data.repository.TestPrevQueriesRepository
 import kotlinx.coroutines.runBlocking
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.ResponseBody
+import okhttp3.ResponseBody.Companion.toResponseBody
+import org.junit.After
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
+import retrofit2.HttpException
+import retrofit2.Response
+import java.io.IOException
 
 class GetCardDataUseCaseTest {
     private lateinit var getCardDataUseCase: GetCardDataUseCase
@@ -21,8 +30,6 @@ class GetCardDataUseCaseTest {
             prevQueriesRepository = prevQueriesRepository,
             dataSource = dataSource
         )
-
-
     }
 
     @Test
@@ -41,4 +48,49 @@ class GetCardDataUseCaseTest {
         }
     }
 
+    @Test
+    fun `IO exception when getting card data`() {
+        val bin = 24508558L
+        dataSource.setException(IOException())
+
+        runBlocking {
+            getCardDataUseCase.execute(bin).collect { status ->
+                assertFalse(status is Status.Success)
+
+                if (status is Status.Error) {
+                    assertNull(status.data)
+                    assertNotNull(status.errorType)
+
+                    assertTrue(status.errorType!!.messageRes == ErrorType.LoadCardDataIoError.messageRes)
+                }
+            }
+        }
+    }
+
+    @Test
+    fun `Http exception when getting card data`() {
+        val bin = 24508558L
+        val httpException = HttpException(Response.error<ResponseBody>(500 , "some content".toResponseBody("plain/text".toMediaTypeOrNull())))
+        dataSource.setException(httpException)
+
+        runBlocking {
+            getCardDataUseCase.execute(bin).collect { status ->
+                assertFalse(status is Status.Success)
+
+                if (status is Status.Error) {
+                    assertNull(status.data)
+                    assertNotNull(status.errorType)
+
+                    assertTrue(status.errorType!! == ErrorType.HttpError)
+                }
+            }
+        }
+    }
+
+    @After
+    fun reset() {
+        dataSource.setException(null)
+    }
 }
+
+

@@ -13,10 +13,11 @@
     <string name="clear">Clear</string>
 
 <!--    exception message strings-->
-    <string name="load_card_data_io_exception_message">Failed to load bank data!</string>
+    <string name="load_card_data_io_exception_message">Failed to load data. Check your internet connection!</string>
     <string name="load_queries_io_exception_message">Failed to load database!</string>
     <string name="activity_not_found_exception_message">No application to perform this action is installed!</string>
     <string name="http_exception_message">Http error: %d</string>
+    <string name="sql_lite_exception_message">Database error happened!</string>
     <string name="wrong_input_message">Wrong input! Bin should ne a number</string>
 
 <!--    messages strings-->

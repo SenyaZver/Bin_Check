@@ -1,5 +1,6 @@
 package com.example.binlist_check.domain.usecase
 
+import android.database.sqlite.SQLiteException
 import com.example.binlist_check.common.Status
 import com.example.binlist_check.common.error_type.ErrorType
 import com.example.binlist_check.data.entity.CardData
@@ -20,8 +21,6 @@ class GetCardDataUseCase @Inject constructor(
             emit(Status.Loading<CardData>())
 
             val cardData = dataSource.getCardData(bin)
-
-
             prevQueriesRepository.addQuery(cardData)
 
             emit(Status.Success<CardData>(data = cardData))
@@ -31,6 +30,8 @@ class GetCardDataUseCase @Inject constructor(
         }
         catch (e: IOException) {
             emit(Status.Error<CardData>(errorType = ErrorType.LoadCardDataIoError))
+        }catch (e: SQLiteException) {
+            emit(Status.Error<CardData>(errorType = ErrorType.SQLiteError))
         }
 
     }

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.binlist_check.common.Status
 import com.example.binlist_check.common.error_type.ErrorType
+import com.example.binlist_check.data.entity.CardData
 import com.example.binlist_check.domain.usecase.ClearPastQueriesUseCase
 import com.example.binlist_check.domain.usecase.GetPastQueriesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
