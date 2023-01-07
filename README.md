@@ -15,6 +15,7 @@ Bin Check was created using:
 - Clean Architecture,
 - MVVM
 - Jetpack Compose, 
+- Kotlin Flow, Coroutines
 - Retrofit
 - Hilt, 
 - Room,
