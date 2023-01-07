@@ -13,10 +13,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.bin_check.data.entity.CardData
+import com.example.bin_check.data.entity.CardDataDTO
 import com.example.bin_check.presentation.theme.smallSpacerSize
 import com.example.bin_check.presentation.theme.standartSpacerSize
 import com.example.bin_check.R
+import com.example.bin_check.domain.entity.CardData
 
 @Composable
 fun BankCard(

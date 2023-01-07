@@ -3,8 +3,9 @@ package com.example.bin_check.domain.usecase
 import android.database.sqlite.SQLiteException
 import com.example.bin_check.common.Status
 import com.example.bin_check.common.error_type.ErrorType
-import com.example.bin_check.data.entity.CardData
+import com.example.bin_check.data.entity.toCardData
 import com.example.bin_check.domain.data_source.DataSource
+import com.example.bin_check.domain.entity.CardData
 import com.example.bin_check.domain.repository.PrevQueriesRepository
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
@@ -20,9 +21,10 @@ class GetCardDataUseCase @Inject constructor(
         try {
             emit(Status.Loading<CardData>())
 
-            val cardData = dataSource.getCardData(bin)
-            prevQueriesRepository.addQuery(cardData)
+            val cardDataDTO = dataSource.getCardData(bin)
+            prevQueriesRepository.addQuery(cardDataDTO)
 
+            val cardData = cardDataDTO.toCardData()
             emit(Status.Success<CardData>(data = cardData))
         }
         catch (e: HttpException) {

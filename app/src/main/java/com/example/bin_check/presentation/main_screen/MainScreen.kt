@@ -112,8 +112,8 @@ fun MainScreen(
 
         NullableAnimatedVisibility(
             value = state.value.cardData,
-            enter = scaleIn() + fadeIn(),
-            exit = scaleOut() + fadeOut(),
+            enter = scaleIn(),
+            exit = scaleOut(),
             modifier = Modifier.weight(1f)
         ) {
             LazyColumn() {

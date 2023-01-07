@@ -2,7 +2,7 @@ package com.example.bin_check.data.remote.response
 
 import com.example.bin_check.common.Utils.getFormattedString
 import com.example.bin_check.data.entity.Bank
-import com.example.bin_check.data.entity.CardData
+import com.example.bin_check.data.entity.CardDataDTO
 import com.example.bin_check.data.entity.Country
 
 
@@ -16,8 +16,8 @@ data class BinResponse (
     val bank: Bank?
 )
 
-fun BinResponse.toCardData(bin: Long): CardData {
-    return CardData(
+fun BinResponse.toCardData(bin: Long): CardDataDTO {
+    return CardDataDTO(
         bin = bin,
         scheme = getFormattedString(scheme),
         type = getFormattedString(type),

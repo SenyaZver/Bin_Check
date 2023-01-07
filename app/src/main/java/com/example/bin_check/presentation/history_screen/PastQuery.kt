@@ -24,9 +24,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.bin_check.data.entity.CardData
+import com.example.bin_check.data.entity.CardDataDTO
 import com.example.bin_check.presentation.main_screen.BankCard
 import com.example.bin_check.R
+import com.example.bin_check.domain.entity.CardData
 
 @Composable
 fun PastQuery(

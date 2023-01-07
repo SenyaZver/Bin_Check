@@ -6,7 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.bin_check.data.database.PastQueriesDAO
 import com.example.bin_check.data.database.PastQueriesDatabase
-import com.example.bin_check.data.entity.CardData
+import com.example.bin_check.data.entity.CardDataDTO
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.*
@@ -39,7 +39,7 @@ class PastQueriesDatabaseTest {
     @Throws(Exception::class)
     fun addQuery(){
         runBlocking{
-            val cardData = CardData(
+            val cardData = CardDataDTO(
                 id = 1,
                 bin = 12346747,
                 number = null,
@@ -64,7 +64,7 @@ class PastQueriesDatabaseTest {
     @Throws(Exception::class)
     fun addMultipleQueries() {
         runBlocking{
-            val cardData1 = CardData(
+            val cardData1 = CardDataDTO(
                 id = 1,
                 bin = 12346747,
                 number = null,
@@ -75,7 +75,7 @@ class PastQueriesDatabaseTest {
                 country = null,
                 bank = null
             )
-            val cardData2 = CardData(
+            val cardData2 = CardDataDTO(
                 id = 2,
                 bin = 12757858,
                 number = null,
@@ -86,7 +86,7 @@ class PastQueriesDatabaseTest {
                 country = null,
                 bank = null
             )
-            val cardData3 = CardData(
+            val cardData3 = CardDataDTO(
                 id = 3,
                 bin = 12757047,
                 number = null,

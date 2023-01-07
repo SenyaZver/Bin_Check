@@ -1,7 +1,7 @@
 package com.example.bin_check.domain.usecase
 
 import com.example.bin_check.common.Status
-import com.example.bin_check.data.entity.CardData
+import com.example.bin_check.data.entity.CardDataDTO
 import com.example.bin_check.data.repository.TestPrevQueriesRepository
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -14,7 +14,7 @@ class ClearPastQueriesUseCaseTest {
     private lateinit var clearPastQueriesUseCase: ClearPastQueriesUseCase
     private lateinit var prevQueriesRepository: TestPrevQueriesRepository
 
-    private val cardData = CardData(
+    private val cardData = CardDataDTO(
         id = 1,
         bin = 12346747,
         number = null,
